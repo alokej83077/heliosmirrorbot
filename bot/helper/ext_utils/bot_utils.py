@@ -31,15 +31,16 @@ class MirrorStatus:
     STATUS_CHECKING = "CheckUp"
     STATUS_SEEDING = "Seed"
 class EngineStatus:
-    STATUS_ARIA = "Aria2c"
-    STATUS_GD = "Google Api"
-    STATUS_MEGA = "Mega Api"
-    STATUS_QB = "Bittorrent"
-    STATUS_TG = "Pyrogram"
-    STATUS_YT = "YT-dlp"
-    STATUS_EXT = "pExtract"
-    STATUS_SPLIT = "FFmpeg"
-    STATUS_ZIP = "p7zip"
+    STATUS_ARIA = "Aria2c v1.35.0"
+    STATUS_GD = "Google Api v2.51.0"
+    STATUS_MEGA = "MegaSDK v3.12.0"
+    STATUS_QB = "qBittorrent v4.3.9"
+    STATUS_TG = "Pyrogram v2.0.27"
+    STATUS_YT = "YT-dlp v22.5.18"
+    STATUS_EXT = "Extract | pExtract"
+    STATUS_SPLIT = "FFmpeg v2.9.1"
+    STATUS_ZIP = "p7zip v16.02"
+    
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -116,8 +117,8 @@ def get_progress_bar_string(status):
     p = 0 if total == 0 else round(completed * 100 / total)
     p = min(max(p, 0), 100)
     cFull = p // 8
-    p_str = '●' * cFull
-    p_str += '○' * (12 - cFull)
+    p_str = '█' * cFull
+    p_str += '░' * (12 - cFull)
     p_str = f"[{p_str}]"
     return p_str
 
@@ -138,7 +139,7 @@ def get_readable_message():
                 msg += f"\n{get_progress_bar_string(download)} {download.progress()}"
                 msg += f"\n<b>Processed:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>Speed:</b> {download.speed()} | <b>ETA:</b> {download.eta()}"
-                msg += f"\n<b>Time Elapsed: </b>{get_readable_time(time() - download.message.date.timestamp())}"
+                msg += f"\n<b>Elapsed: </b>{get_readable_time(time() - download.message.date.timestamp())}"
                 if hasattr(download, 'seeders_num'):
                     try:
                         msg += f"\n<b>Seeders:</b> {download.seeders_num()} | <b>Leechers:</b> {download.leechers_num()}"
